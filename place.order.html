@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>Place Order</title>
+</head>
+<body>
+    <div class="cart">
+  <h3>Cart</h3>
+
+  <div class="cart-item">
+    <button onclick="decrease()">-</button>
+    <span id="qty">1</span>
+    <button onclick="increase()">+</button>
+  </div>
+
+  <p>Items Total: ₹<span id="itemsTotal">100</span></p>
+  <p>Discount: −₹<span id="discount">0</span></p>
+  <p>GST (5%): ₹<span id="gst">0</span></p>
+  <p>Delivery Fee: ₹<span id="delivery">99</span></p>
+
+  <hr>
+  <h4>Final Total: ₹<span id="finalTotal">199</span></h4>
+</div>
+<script>
+  let quantity = 1;
+  let itemPrice = 100;
+
+  let gstPercent = 5;
+  let discountPercent = 10;
+  let deliveryFee = 99;
+
+  function calculateBill() {
+    let itemsTotal = quantity * itemPrice;
+
+    // Discount
+    let discount = (itemsTotal * discountPercent) / 100;
+
+    // GST (after discount)
+    let gst = ((itemsTotal - discount) * gstPercent) / 100;
+
+    // Delivery fee logic
+    let delivery = itemsTotal >= 200 ? 0 : deliveryFee;
+
+    // Final total
+    let finalTotal = itemsTotal - discount + gst + delivery;
+
+    // Update UI
+    document.getElementById("qty").innerText = quantity;
+    document.getElementById("itemsTotal").innerText = itemsTotal;
+    document.getElementById("discount").innerText = discount.toFixed(0);
+    document.getElementById("gst").innerText = gst.toFixed(0);
+    document.getElementById("delivery").innerText = delivery;
+    document.getElementById("finalTotal").innerText = finalTotal.toFixed(0);
+  }
+
+  function increase() {
+    quantity++;
+    calculateBill();
+  }
+
+  function decrease() {
+    if (quantity > 1) {
+      quantity--;
+      calculateBill();
+    } else {
+      window.history.back(); // quantity 0 avvakunda back
+    }
+  }
+
+  // Initial load
+  calculateBill();
+</script>
+
+</body>
+</html>
