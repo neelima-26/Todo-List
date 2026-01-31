@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,75 @@
     <link rel="stylesheet" href="styles.css">
 
 </head>
+
 <body>
-    <h1>Food Delivery App</h1>
-   <div class="card">
-    <img src="/images/Images.jpg">
-    <h2>Rajma</h2>
-    <p class="price">$300</p>
-    <p class="desc"> very tasty and healthy</p>
-    <button onclick="addtocart()"> Add</button>
-    <button onclick="opencart()">Go To Cart</button>
-   </div>
+   <!-- first div -->
+    <div id="div1">
+        <h1>Food Delivery App</h1>
+        <div class="card">
+            <img class="img" src="/images/Images.jpg">
+            <h2>Rajma</h2>
+            <p class="price">$100</p>
+            <p class="desc"> very tasty and healthy</p>
+            <button onclick="showDiv2()"> Add</button>
+            <button onclick="opencart()">Go To Cart</button>
+        </div>
+    </div>
+     <!-- second div -->
+    <div id="div2">
+        <div class="cart" id="cart">
+            <h3>Cart</h3>
+            <img class="img" src="/images/Images.jpg">
+            <h2>Rajma</h2>
+            <p>Price: ₹<span id="price">$100</span></p>
+            <div class="cart-item">
+                <button onclick="decrease()">-</button>
+                <span id="qty"></span>
+                <button onclick="increase()">+</button>
+            </div>
+            <button class="buy-btn" onclick="buy()">Buy</button>
+        </div>
+    </div>
+     <!-- third div -->
+    <div id="div3">
+        <div class="Total">
+            <h3>Cart</h3>
+
+            <div class="cart-item">
+                <button onclick="decrease()">-</button>
+                <span id="qty">1</span>
+                <button onclick="increase()">+</button>
+            </div>
+
+            <p>Items Total: $<span id="itemsTotal">100</span></p>
+            <p>Discount: −$<span id="discount">0</span></p>
+            <p>GST (5%): $<span id="gst">0</span></p>
+            <p>Delivery Fee: $<span id="delivery">99</span></p>
+
+            <hr>
+            <h4>Final Total: $<span id="finalTotal">199</span></h4>
+        </div>
+    </div>
+<script>
+    function showDiv2(){
+        document.getElementById("div1").style.display = "none";
+        document.getElementById("div2").style.display = "block";
+    }
+    function showDiv2(){
+    let toast = document.getElementById("toast");
+
+    toast.classList.add("show");
+    }
+
+    function buy(){
+        document.getElementById("div2").style.display = "none";
+        document.getElementById("div3").style.display ="block";
+    }
+</script>
+
+
 
    
 
 
-   <a href="cart.html"></a>
-    <script>
-        function addtocart(){
-            alert("Item Added To Cart");
-        }
-        function opencart(){
-             window.location.href = "cart.html";
-        }
-    </script>
-</body>
 </html>
