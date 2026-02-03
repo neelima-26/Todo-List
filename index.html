@@ -1,82 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kicthen</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Cart</title>
 
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-   <!-- first div -->
-    <div id="div1">
-        <h1>Food Delivery App</h1>
-        <div class="card">
-            <img class="img" src="/images/Images.jpg">
-            <h2>Rajma</h2>
-            <p class="price">$100</p>
-            <p class="desc"> very tasty and healthy</p>
-            <button onclick="showDiv2()"> Add</button>
-            <button onclick="opencart()">Go To Cart</button>
-        </div>
-    </div>
-     <!-- second div -->
-    <div id="div2">
-        <div class="cart" id="cart">
-            <h3>Cart</h3>
-            <img class="img" src="/images/Images.jpg">
-            <h2>Rajma</h2>
-            <p>Price: ₹<span id="price">$100</span></p>
-            <div class="cart-item">
-                <button onclick="decrease()">-</button>
-                <span id="qty"></span>
-                <button onclick="increase()">+</button>
+
+<div class="container">
+
+    <!-- PRODUCTS -->
+    <div class="items-list">
+
+        <!-- PRODUCT 1 -->
+        <div class="item">
+            <img src="images/download1.jpg">
+            <h4>Rajma</h4>
+            <p>₹30</p>
+            <button id="addBtn-1" onclick="add(1)">ADD</button>
+            <div id="qtyBox-1" class="qty-box" style="display:none">
+                <button onclick="minus(1)">-</button>
+                <p id="qty-1">0</p>
+                <button onclick="plus(1)">+</button>
             </div>
-            <button class="buy-btn" onclick="buy()">Buy</button>
         </div>
-    </div>
-     <!-- third div -->
-    <div id="div3">
-        <div class="Total">
-            <h3>Cart</h3>
 
-            <div class="cart-item">
-                <button onclick="decrease()">-</button>
-                <span id="qty">1</span>
-                <button onclick="increase()">+</button>
+        <!-- PRODUCT 2 -->
+        <div class="item">
+            <img src="images/download2.jpg">
+            <h4>Cheesy Pasta</h4>
+            <p>₹40</p>
+            <button id="addBtn-2" onclick="add(2)">ADD</button>
+            <div id="qtyBox-2" class="qty-box" style="display:none">
+                <button onclick="minus(2)">-</button>
+                <p id="qty-2">0</p>
+                <button onclick="plus(2)">+</button>
             </div>
-
-            <p>Items Total: $<span id="itemsTotal">100</span></p>
-            <p>Discount: −$<span id="discount">0</span></p>
-            <p>GST (5%): $<span id="gst">0</span></p>
-            <p>Delivery Fee: $<span id="delivery">99</span></p>
-
-            <hr>
-            <h4>Final Total: $<span id="finalTotal">199</span></h4>
         </div>
+
+        <!-- PRODUCT 3 -->
+        <div class="item">
+            <img src="images/download3.jpg">
+            <h4>Sprouts</h4>
+            <p>₹20</p>
+            <button id="addBtn-3" onclick="add(3)">ADD</button>
+            <div id="qtyBox-3" class="qty-box" style="display:none">
+                <button onclick="minus(3)">-</button>
+                <p id="qty-3">0</p>
+                <button onclick="plus(3)">+</button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 4 -->
+        <div class="item">
+            <img src="images/download4.jpg">
+            <h4>HorseGram</h4>
+            <p>₹35</p>
+            <button id="addBtn-4" onclick="add(4)">ADD</button>
+            <div id="qtyBox-4" class="qty-box" style="display:none">
+                <button onclick="minus(4)">-</button>
+                <p id="qty-4">0</p>
+                <button onclick="plus(4)">+</button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 5 -->
+        <div class="item">
+            <img src="images/download5.jpg">
+            <h4>Oats</h4>
+            <p>₹25</p>
+            <button id="addBtn-5" onclick="add(5)">ADD</button>
+            <div id="qtyBox-5" class="qty-box" style="display:none">
+                <button onclick="minus(5)">-</button>
+                <p id="qty-5">0</p>
+                <button onclick="plus(5)">+</button>
+            </div>
+        </div>
+
+        <!-- PRODUCT 6 -->
+        <div class="item">
+            <img src="images/download6.jpg">
+            <h4>Spy Pasta</h4>
+            <p>₹50</p>
+            <button id="addBtn-6" onclick="add(6)">ADD</button>
+            <div id="qtyBox-6" class="qty-box" style="display:none">
+                <button onclick="minus(6)">-</button>
+                <p id="qty-6">0</p>
+                <button onclick="plus(6)">+</button>
+            </div>
+        </div>
+
     </div>
+
+    <!-- CART -->
+    <div class="cart">
+        <h3>Cart</h3>
+        <div id="cartItems">Cart empty</div>
+        <hr>
+        <p>Items Total: ₹<span id="itemsTotal">0</span></p>
+        <p>Discount (10%): ₹<span id="discount">0</span></p>
+        <p>GST (5%): ₹<span id="gst">0</span></p>
+        <p>Delivery: ₹25</p>
+        <h4>Total: ₹<span id="finalTotal">25</span></h4>
+    </div>
+
+</div>
+
 <script>
-    function showDiv2(){
-        document.getElementById("div1").style.display = "none";
-        document.getElementById("div2").style.display = "block";
-    }
-    function showDiv2(){
-    let toast = document.getElementById("toast");
+    const products = {
+        1:{name:"Rajma",price:30,img:"images/download1.jpg",qty:0},
+        2:{name:"Cheesy Pasta",price:40,img:"images/download2.jpg",qty:0},
+        3:{name:"Sprouts",price:20,img:"images/download3.jpg",qty:0},
+        4:{name:"HorseGram",price:35,img:"images/download4.jpg",qty:0},
+        5:{name:"Oats",price:25,img:"images/download5.jpg",qty:0},
+        6:{name:"Spy Pasta",price:50,img:"images/download6.jpg",qty:0},
+    };
 
-    toast.classList.add("show");
+    function add(id){ products[id].qty=1; updateUI(); }
+    function plus(id){ products[id].qty++; updateUI(); }
+    function minus(id){ if(--products[id].qty<0) products[id].qty=0; updateUI(); }
+
+    function updateUI(){
+        let cartHTML="", total=0;
+
+        for(let id in products){
+            const p=products[id];
+            const addBtn=document.getElementById("addBtn-"+id);
+            const qtyBox=document.getElementById("qtyBox-"+id);
+            const qtyEl=document.getElementById("qty-"+id);
+
+            if(p.qty===0){
+                addBtn.style.display="block";
+                qtyBox.style.display="none";
+            }else{
+                addBtn.style.display="none";
+                qtyBox.style.display="flex";
+                qtyEl.innerText=p.qty;
+
+                cartHTML+=`
+                    <div class="cart-item">
+                        <img src="${p.img}">
+                        <div>
+                            <p>${p.name}</p>
+                            <p>₹${p.price}</p>
+                            <button onclick="minus(${id})">-</button>
+                            ${p.qty}
+                            <button onclick="plus(${id})">+</button>
+                        </div>
+                    </div>`;
+                total+=p.qty*p.price;
+            }
+        }
+
+        document.getElementById("cartItems").innerHTML=cartHTML||"Cart empty";
+
+        let discount=Math.floor(total*0.1);
+        let gst=Math.floor((total-discount)*0.05);
+        let final=total-discount+gst+25;
+
+        itemsTotal.innerText=total;
+        discountEl.innerText=discount;
+        gstEl.innerText=gst;
+        finalTotal.innerText=final;
     }
 
-    function buy(){
-        document.getElementById("div2").style.display = "none";
-        document.getElementById("div3").style.display ="block";
-    }
+    const itemsTotal=document.getElementById("itemsTotal");
+    const discountEl=document.getElementById("discount");
+    const gstEl=document.getElementById("gst");
+    const finalTotal=document.getElementById("finalTotal");
 </script>
 
-
-
-   
-
-
+</body>
 </html>
